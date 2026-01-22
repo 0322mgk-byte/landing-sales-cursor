@@ -44,20 +44,23 @@ export const heroConfig = {
   // 간격 설정 (Tailwind 클래스)
   // ========================================
   spacing: {
-    // 서브 타이틀 → 메인 헤드라인 간격
-    subTitleMarginBottom: "mb-8",
+    // 서브 타이틀 → 메인 헤드라인 간격 (일정한 간격 적용)
+    subTitleMarginBottom: "mb-4 sm:mb-6 lg:mb-8",
 
     // 메인 헤드라인 행간
-    headlineLeading: "leading-tight lg:leading-[1.17]",
+    headlineLeading: "leading-[1.1] lg:leading-[1.12]",
 
-    // 메인 헤드라인 → 서브 카피 간격
-    headlineMarginBottom: "mb-8",
+    // 메인 헤드라인 → 서브 카피 간격 (일정한 간격 적용)
+    headlineMarginBottom: "mb-4 sm:mb-6 lg:mb-8",
 
     // 서브 카피 행간
     subCopyLeading: "leading-relaxed lg:leading-[1.6]",
 
-    // 서브 카피 → CTA 버튼 간격
-    subCopyMarginBottom: "mb-8",
+    // 서브 카피 → CTA 버튼 간격 (일정한 간격 적용)
+    subCopyMarginBottom: "mb-4 sm:mb-6 lg:mb-8",
+    
+    // CTA 버튼 패딩
+    ctaButtonPadding: "px-6 py-3 sm:px-8 sm:py-3.5 lg:px-9 lg:py-3.5",
   },
 
   // ========================================
@@ -65,16 +68,16 @@ export const heroConfig = {
   // ========================================
   fontSize: {
     // 서브 타이틀
-    subTitle: "text-xl sm:text-2xl lg:text-3xl",
+    subTitle: "text-lg sm:text-xl lg:text-xl 2xl:text-2xl",
 
     // 메인 헤드라인
-    headline: "text-[48px] sm:text-[64px] lg:text-[80px]",
+    headline: "text-[36px] sm:text-[48px] lg:text-[54px] 2xl:text-[72px]",
 
     // 서브 카피
-    subCopy: "text-lg sm:text-xl lg:text-2xl",
+    subCopy: "text-base sm:text-base lg:text-lg 2xl:text-xl",
 
     // CTA 버튼
-    ctaButton: "text-xl",
+    ctaButton: "text-base lg:text-lg 2xl:text-xl",
   },
 
   // ========================================

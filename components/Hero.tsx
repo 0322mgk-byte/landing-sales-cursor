@@ -56,7 +56,7 @@ const Hero = () => {
       </header>
 
       {/* 메인 컨텐츠 */}
-      <div className="relative z-[2] max-w-7xl mx-auto px-6 h-screen flex items-center">
+      <div className="relative z-[2] max-w-7xl mx-auto px-6 h-screen flex items-center pt-[80px]">
         <div className="w-full">
           {/* 텍스트 영역 */}
           <div className="text-white">
@@ -79,8 +79,6 @@ const Hero = () => {
               className={`${fontSize.headline} ${spacing.headlineLeading} ${spacing.headlineMarginBottom} text-white`}
             >
               <span className={fontWeight.headlineNormal}>{text.headline.line1.prefix}</span>
-              <span className={fontWeight.headlineStrong}>{text.headline.line1.highlight}</span>
-              <span className={fontWeight.headlineNormal}>{text.headline.line1.suffix}</span>
               <br />
               <span className={`${fontWeight.headlineStrong} text-[#ec622d]`}>{text.headline.line2}</span>
             </motion.h1>
@@ -107,7 +105,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
-              <button className={`group bg-white text-[#ec622d] px-10 py-4 rounded-full font-bold ${fontSize.ctaButton} transition-all duration-300 hover:bg-[#ec622d] hover:text-white flex items-center gap-3`}>
+              <button className={`group bg-white text-[#ec622d] ${spacing.ctaButtonPadding} rounded-full font-bold ${fontSize.ctaButton} transition-all duration-300 hover:bg-[#ec622d] hover:text-white flex items-center gap-3`}>
                 <span className="transition-transform duration-300 group-hover:scale-110">{text.ctaButton.text}</span>
                 <span className="transition-transform duration-300 group-hover:translate-x-1">{text.ctaButton.arrow}</span>
               </button>
