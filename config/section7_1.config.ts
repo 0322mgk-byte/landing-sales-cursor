@@ -23,10 +23,11 @@ export const section7_1Config = {
 
   // 애니메이션 설정
   animation: {
-    translateYRange: ["-32%", "65%"] as [string, string],
+    translateYRange: ["-25%", "50%"] as [string, string],
     insetYRange: [35, 0] as [number, number],
     insetXRange: [42, 0] as [number, number],
     roundednessRange: [1000, 16] as [number, number],
+    scrollRange: [0, 0.86] as [number, number],
   },
 
   // 스타일 설정

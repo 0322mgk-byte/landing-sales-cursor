@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils"
 
 type AnimateT = "left" | "right" | "top" | "bottom" | "z" | "blur" | undefined
 const SPRING_CONFIG = {
-  type: "spring",
+  type: "spring" as const,
   stiffness: 100,
   damping: 16,
   mass: 0.75,
@@ -136,6 +136,7 @@ interface ContainerInsetProps extends HTMLMotionProps<"div"> {
   insetYRange?: [number, number]
   insetXRange?: [number, number]
   roundednessRange?: [number, number]
+  scrollRange?: [number, number]
 }
 const ContainerInset = React.forwardRef<HTMLDivElement, ContainerInsetProps>(
   (
@@ -144,6 +145,7 @@ const ContainerInset = React.forwardRef<HTMLDivElement, ContainerInsetProps>(
       insetYRange = [35, 0],
       insetXRange = [42, 0],
       roundednessRange = [1000, 16],
+      scrollRange = [0, 1],
       children,
       className,
       ...props
@@ -151,11 +153,11 @@ const ContainerInset = React.forwardRef<HTMLDivElement, ContainerInsetProps>(
     ref
   ) => {
     const { scrollYProgress } = useContainerScrollContext()
-    const y = useTransform(scrollYProgress, [0, 1], translateYRange)
+    const y = useTransform(scrollYProgress, scrollRange, translateYRange)
 
-    const insetY = useTransform(scrollYProgress, [0, 1], insetYRange)
-    const insetX = useTransform(scrollYProgress, [0, 1], insetXRange)
-    const roundedness = useTransform(scrollYProgress, [0, 1], roundednessRange)
+    const insetY = useTransform(scrollYProgress, scrollRange, insetYRange)
+    const insetX = useTransform(scrollYProgress, scrollRange, insetXRange)
+    const roundedness = useTransform(scrollYProgress, scrollRange, roundednessRange)
 
     const clipPath = useMotionTemplate`inset(${insetY}% ${insetX}% ${insetY}% ${insetX}% round ${roundedness}px)`
 

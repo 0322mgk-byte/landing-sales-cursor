@@ -12,8 +12,8 @@ const { section, copy, video, animation, styles } = section7_1Config;
 
 const Section7_1 = () => {
   return (
-    <section className={`${section.backgroundColor} font-['Paperlogy'] pt-32 min-h-[120vh]`}>
-      <ContainerScroll>
+    <section className={`${section.backgroundColor} font-['Paperlogy'] pt-[80px] min-h-[100vh]`}>
+      <ContainerScroll className="pb-[30%]">
         {/* 텍스트 영역 */}
         <ContainerStagger className="flex flex-col items-center justify-center text-center px-4 mb-8">
           <ContainerAnimated animation="blur">
@@ -44,6 +44,7 @@ const Section7_1 = () => {
           insetYRange={animation.insetYRange}
           insetXRange={animation.insetXRange}
           roundednessRange={animation.roundednessRange}
+          scrollRange={animation.scrollRange}
           className="w-full"
         >
           <video

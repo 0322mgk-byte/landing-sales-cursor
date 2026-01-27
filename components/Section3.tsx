@@ -41,15 +41,6 @@ const Section3 = () => {
           >
             {headline.main}
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl text-gray-500 font-medium"
-          >
-            {headline.sub}
-          </motion.p>
         </div>
 
         {/* 비교 레이아웃 */}
