@@ -3,9 +3,11 @@
 import { motion } from "framer-motion";
 import { heroConfig } from "@/config/hero.config";
 import { headerConfig } from "@/config/header.config";
+import { useConsultModal } from "@/components/ConsultModal";
 
 const Hero = () => {
   const { text, spacing, fontSize, fontWeight, underline } = heroConfig;
+  const { open: openConsult } = useConsultModal();
   const { logo, navigation, style } = headerConfig;
 
   return (
@@ -105,7 +107,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
-              <button className={`group bg-white text-[#ec622d] ${spacing.ctaButtonPadding} rounded-full font-bold ${fontSize.ctaButton} transition-all duration-300 hover:bg-[#ec622d] hover:text-white flex items-center gap-3`}>
+              <button onClick={openConsult} className={`group bg-white text-[#ec622d] ${spacing.ctaButtonPadding} rounded-full font-bold ${fontSize.ctaButton} transition-all duration-300 hover:bg-[#ec622d] hover:text-white flex items-center gap-3`}>
                 <span className="transition-transform duration-300 group-hover:scale-110">{text.ctaButton.text}</span>
                 <span className="transition-transform duration-300 group-hover:translate-x-1">{text.ctaButton.arrow}</span>
               </button>

@@ -2244,3 +2244,12 @@ body {
     transform: translateY(2000px);
   }
 }
+
+/* Section4 애니메이션 제어 */
+.section4-paused {
+  animation-play-state: paused !important;
+}
+
+.section4-animate {
+  animation-play-state: running !important;
+}

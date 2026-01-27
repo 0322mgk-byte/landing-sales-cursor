@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ConsultModalProvider } from "@/components/ConsultModal";
 
 export const metadata: Metadata = {
   title: "팔리는 랜딩페이지 | 장사꾼이 만드는 전환 페이지",
@@ -20,7 +21,9 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        {children}
+        <ConsultModalProvider>
+          {children}
+        </ConsultModalProvider>
       </body>
     </html>
   );

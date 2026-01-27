@@ -4,6 +4,7 @@ import { useState, ReactNode } from "react";
 import Image from "next/image";
 import { section5_1Config } from "@/config/section5-1.config";
 import { cn } from "@/lib/utils";
+import { useConsultModal } from "@/components/ConsultModal";
 
 const { section, copy, button, marquee } = section5_1Config;
 
@@ -56,6 +57,7 @@ function CTAMarquee({
 
 // 스크램블 버튼
 function ScrambleButton() {
+  const { open: openConsult } = useConsultModal();
   const [displayText, setDisplayText] = useState(button.text);
   const [isScrambling, setIsScrambling] = useState(false);
   const originalText = button.text;
@@ -92,6 +94,7 @@ function ScrambleButton() {
 
   return (
     <button
+      onClick={openConsult}
       onMouseEnter={scramble}
       className="px-8 py-4 rounded-full font-semibold text-lg transition-colors shadow-lg"
       style={{

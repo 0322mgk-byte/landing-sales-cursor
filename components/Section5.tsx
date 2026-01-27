@@ -91,6 +91,7 @@ const Section5 = () => {
                     decimalPlaces={stat.decimalPlaces}
                     suffix={stat.suffix}
                     prefix={stat.prefix}
+                    restartOnView={true}
                   />
                 </div>
                 {/* 라벨 */}

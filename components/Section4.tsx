@@ -1,18 +1,26 @@
 "use client";
 
+import { useRef } from "react";
+import { useInView } from "motion/react";
 import { FeatureSteps } from "@/components/feature-section";
 import { section4Config } from "@/config/section4.config";
 
 const { copy, autoPlayInterval, features } = section4Config;
 
 const Section4 = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: false, margin: "-100px" });
+
   return (
-    <section className="font-['Paperlogy'] py-20 relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="font-['Paperlogy'] py-20 relative overflow-hidden"
+    >
       {/* 별 배경 */}
       <div className="section4-stars-container">
-        <div className="section4-stars"></div>
-        <div className="section4-stars2"></div>
-        <div className="section4-stars3"></div>
+        <div className={`section4-stars ${isInView ? "section4-animate" : "section4-paused"}`}></div>
+        <div className={`section4-stars2 ${isInView ? "section4-animate" : "section4-paused"}`}></div>
+        <div className={`section4-stars3 ${isInView ? "section4-animate" : "section4-paused"}`}></div>
       </div>
 
       {/* 커스텀 헤더 */}
