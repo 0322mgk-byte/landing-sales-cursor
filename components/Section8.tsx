@@ -17,7 +17,7 @@ const Section8 = () => {
 
   return (
     <section
-      className={`${section.backgroundColor} font-['Paperlogy'] relative z-10 pt-32 pb-24 md:pt-52 md:pb-32`}
+      className={`${section.backgroundColor} font-['Paperlogy'] py-24 md:py-32`}
     >
       <div className="container mx-auto max-w-6xl px-4">
         <h2
