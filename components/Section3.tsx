@@ -1,140 +1,155 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import { section3Config } from "@/config/section3.config";
+import { MouseEvent } from "react";
 
 const Section3 = () => {
-  const { section, headline, comparison } = section3Config;
+  const { text } = section3Config;
 
-  // 화살표 아이콘 (SVG)
-  const ArrowDownIcon = () => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={2}
-      stroke="currentColor"
-      className="w-6 h-6 text-[#ec622d] animate-bounce mx-auto my-2"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
-    </svg>
-  );
+  // Spotlight State
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove({ currentTarget, clientX, clientY }: MouseEvent) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
 
   return (
-    <section
-      className="relative overflow-hidden font-['Paperlogy']"
-      style={{
-        backgroundColor: section.backgroundColor,
-        paddingTop: section.paddingTop,
-        paddingBottom: section.paddingBottom
-      }}
-    >
-      <div className="max-w-7xl mx-auto px-6">
-        {/* 헤드라인 */}
-        <div className="text-center mb-16 md:mb-24">
-          <motion.h2
+    <section className="relative bg-[#050505] min-h-screen py-24 px-6 flex items-center justify-center overflow-hidden">
+      <div className="max-w-7xl w-full mx-auto relative z-10">
+
+        {/* 헤더 텍스트 */}
+        <div className="text-center mb-20 lg:mb-32">
+          <motion.span
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 whitespace-pre-wrap leading-tight"
+            transition={{ duration: 0.5 }}
+            className="block text-gray-500 text-lg sm:text-xl mb-4 font-medium tracking-wide"
           >
-            {headline.main}
+            {text.subtitle}
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight"
+          >
+            {text.title.line1}{" "}
+            <span className="text-[#ec622d]">{text.title.highlight}</span>
           </motion.h2>
         </div>
 
-        {/* 비교 레이아웃 */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center relative">
+        {/* 미니멀 글로우 비교 컨테이너 */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
 
-          {/* VS 뱃지 (데스크탑 중앙, 모바일 사이) */}
-          <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-[#ec622d] rounded-full items-center justify-center z-10 text-white font-bold text-xl shadow-lg">
-            VS
-          </div>
-
-          {/* 왼쪽: 일반 웹 에이전시 (Bad Case) */}
+          {/* 1. 일반 웹 에이전시 (Static & Matte) */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="rounded-3xl p-8 md:p-12 h-full flex flex-col justify-between relative border"
-            style={{
-              backgroundColor: comparison.bad.theme.bgColor,
-              borderColor: comparison.bad.theme.borderColor,
-            }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="h-full bg-[#0a0a0a] border border-white/5 rounded-3xl p-10 sm:p-12 flex flex-col justify-between group hover:border-white/10 transition-colors duration-500"
           >
             <div>
-              <h3 className="text-2xl font-bold mb-8" style={{ color: comparison.bad.theme.titleColor }}>
-                {comparison.bad.title}
-              </h3>
-              <div className="bg-white/50 rounded-xl p-6 mb-8 text-center italic border border-dashed border-gray-300">
-                <p className="text-lg leading-relaxed" style={{ color: comparison.bad.theme.titleColor }}>
-                  {comparison.bad.description}
-                </p>
-              </div>
+              <h3 className="text-2xl font-medium text-gray-600 mb-8">{text.leftCard.title}</h3>
+              <ul className="space-y-6">
+                {text.leftCard.items.map((item, index) => (
+                  <li key={index} className="flex items-center gap-4 text-gray-700">
+                    <div className="w-1.5 h-1.5 rounded-full bg-gray-800" />
+                    <span className="text-lg">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div className="mt-4 text-center">
-              <p className="text-lg font-bold text-gray-500">
-                {comparison.bad.result}
-              </p>
-            </div>
+            <p className="text-gray-800 mt-12 pt-8 border-t border-white/5 text-sm">
+              {text.leftCard.description}
+            </p>
           </motion.div>
 
-          {/* 모바일용 VS */}
-          <div className="flex lg:hidden justify-center items-center -my-4 z-10">
-            <div className="w-12 h-12 bg-[#ec622d] rounded-full flex items-center justify-center text-white font-bold shadow-lg">VS</div>
-          </div>
-
-          {/* 오른쪽: 우리의 제작 방식 (Good Case) */}
+          {/* 2. 우리의 제작 방식 (Interactive Spotlight) */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="rounded-3xl p-8 md:p-12 h-full flex flex-col relative border-2 overflow-hidden"
-            style={{
-              backgroundColor: comparison.good.theme.bgColor,
-              borderColor: comparison.good.theme.borderColor,
-              boxShadow: comparison.good.theme.boxShadow
-            }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            onMouseMove={handleMouseMove}
+            className="group relative h-full bg-gray-900 border border-white/10 rounded-3xl overflow-hidden"
           >
-            {/* 배경 데코레이션 */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[#ec622d]/5 rounded-bl-full -mr-8 -mt-8"></div>
+            {/* Spotlight Gradient - 마우스 따라다니는 효과 */}
+            <motion.div
+              className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition duration-300 group-hover:opacity-100"
+              style={{
+                background: useMotionTemplate`
+                  radial-gradient(
+                    650px circle at ${mouseX}px ${mouseY}px,
+                    rgba(236, 98, 45, 0.15),
+                    transparent 80%
+                  )
+                `,
+              }}
+            />
+            {/* Spotlight Border - 테두리 하이라이트 */}
+            <motion.div
+              className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition duration-300 group-hover:opacity-100"
+              style={{
+                background: useMotionTemplate`
+                  radial-gradient(
+                    600px circle at ${mouseX}px ${mouseY}px,
+                    rgba(236, 98, 45, 0.4),
+                    transparent 40%
+                  )
+                `,
+              }}
+            />
 
-            <h3 className="text-2xl font-bold mb-2" style={{ color: comparison.good.theme.titleColor }}>
-              {comparison.good.title}
-            </h3>
-            <p className="text-gray-500 mb-8 font-medium">
-              {comparison.good.description}
-            </p>
-
-            {/* 단계별 프로세스 */}
-            <div className="space-y-4 mb-8 flex-grow">
-              {comparison.good.steps.map((step, index) => (
-                <div key={index} className="relative">
-                  <div className="bg-[#ec622d]/5 rounded-xl p-4 flex items-center gap-4 border border-[#ec622d]/10">
-                    <span className="text-2xl">{step.icon}</span>
-                    <span className="font-bold text-gray-800 text-lg">{step.text}</span>
-                  </div>
-                  {/* 마지막 항목이 아니면 화살표 표시 */}
-                  {index < comparison.good.steps.length - 1 && (
-                    <div className="h-6 flex items-center justify-center">
-                      <div className="w-0.5 h-full bg-[#ec622d]/20"></div>
-                    </div>
-                  )}
-                </div>
-              ))}
+            {/* Particles Background (고정 애니메이션) */}
+             <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-[#ec622d] rounded-full opacity-0 group-hover:opacity-50 group-hover:animate-float-1" />
+                <div className="absolute top-3/4 left-3/4 w-1.5 h-1.5 bg-[#facc15] rounded-full opacity-0 group-hover:opacity-40 group-hover:animate-float-2" />
+                <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-white rounded-full opacity-0 group-hover:opacity-30 group-hover:animate-float-3" />
             </div>
 
-            <div className="bg-[#ec622d] rounded-xl p-6 text-center text-white shadow-md transform transition-transform hover:scale-105">
-              <p className="text-lg font-bold leading-relaxed whitespace-pre-wrap">
-                {comparison.good.result}
+            <div className="relative h-full bg-[#0a0a0a] rounded-[23px] p-10 sm:p-12 flex flex-col justify-between m-[1px]">
+              <div>
+                <div className="flex items-center justify-between mb-8">
+                  <h3 className="text-3xl font-bold text-white group-hover:text-[#ec622d] transition-colors duration-300">{text.rightCard.title}</h3>
+                  <div className="bg-[#ec622d]/20 text-[#ec622d] text-xs font-bold px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">
+                    PREMIUM
+                  </div>
+                </div>
+
+                <ul className="space-y-6">
+                  {text.rightCard.items.map((item, index) => (
+                    <li key={index} className="flex items-center gap-4 text-gray-400 group-hover:text-white transition-colors duration-300">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#ec622d] group-hover:shadow-[0_0_8px_#ec622d] transition-all duration-300" />
+                      <span className="text-lg font-medium">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <p className="mt-12 pt-8 border-t border-white/5 text-[#ec622d] font-semibold text-lg opacity-60 group-hover:opacity-100 transition-opacity duration-300">
+                "{text.rightCard.description}"
               </p>
             </div>
           </motion.div>
 
         </div>
       </div>
+
+      <style jsx global>{`
+        @keyframes float-1 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        @keyframes float-2 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes float-3 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .animate-float-1 { animation: float-1 4s ease-in-out infinite; }
+        .animate-float-2 { animation: float-2 5s ease-in-out infinite; }
+        .animate-float-3 { animation: float-3 3s ease-in-out infinite; }
+      `}</style>
     </section>
   );
 };
